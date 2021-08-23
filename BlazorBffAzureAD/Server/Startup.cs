@@ -1,5 +1,7 @@
 using BlazorHosted.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 
@@ -16,7 +18,7 @@ namespace BlazorHosted.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<GraphApiClientService>();
+            //services.AddScoped<GraphApiClientService>();
 
             services.AddAntiforgery(options =>
             {
@@ -31,10 +33,8 @@ namespace BlazorHosted.Server
 
             string[] initialScopes = Configuration.GetValue<string>("UserApiOne:ScopeForAccessToken")?.Split(' ');
 
-            services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
+            services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureB2C")
                 .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-                 .AddMicrosoftGraph("https://graph.microsoft.com/beta",
-                    "User.ReadBasic.All user.read")
                 .AddInMemoryTokenCaches();
 
             services.AddControllersWithViews(options =>
@@ -42,10 +42,10 @@ namespace BlazorHosted.Server
 
             services.AddRazorPages().AddMvcOptions(options =>
             {
-                //var policy = new AuthorizationPolicyBuilder()
-                //    .RequireAuthenticatedUser()
-                //    .Build();
-                //options.Filters.Add(new AuthorizeFilter(policy));
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
             }).AddMicrosoftIdentityUI();
         }
 
