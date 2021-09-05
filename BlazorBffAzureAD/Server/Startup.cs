@@ -66,9 +66,9 @@ namespace BlazorHosted.Server
                 app.UseExceptionHandler("/Error");
             }
 
-            //app.UseSecurityHeaders(
-            //    SecurityHeadersDefinitions.GetHeaderPolicyCollection(env.IsDevelopment(),
-            //        Configuration["AzureB2C:Instance"]));
+            app.UseSecurityHeaders(
+                SecurityHeadersDefinitions.GetHeaderPolicyCollection(env.IsDevelopment(),
+                    Configuration["AzureB2C:Instance"]));
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
