@@ -31,7 +31,7 @@ namespace BlazorHosted.Server
             services.AddHttpClient();
             services.AddOptions();
 
-            string[] initialScopes = Configuration.GetValue<string>("UserApiOne:ScopeForAccessToken")?.Split(' ');
+            string[] initialScopes = Configuration.GetValue<string>("DirectApi:ScopeForAccessToken")?.Split(' ');
 
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureB2C")
                 .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
