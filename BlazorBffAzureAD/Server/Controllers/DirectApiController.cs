@@ -8,7 +8,7 @@ namespace BlazorHosted.Server.Controllers
 {
     [ValidateAntiForgeryToken]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [AuthorizeForScopes(Scopes = new string[] { "api://b2a09168-54e2-4bc4-af92-a710a64ef1fa/access_as_user" })]
+    [AuthorizeForScopes(Scopes = new string[] { "https://b2cdamienbod.onmicrosoft.com/e207bcb0-1a36-4d37-a9cd-b917bb1366b1/access_as_user" })]
     [ApiController]
     [Route("api/[controller]")]
     public class DirectApiController : ControllerBase
