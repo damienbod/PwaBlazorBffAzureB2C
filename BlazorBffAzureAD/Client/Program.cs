@@ -1,8 +1,12 @@
 ﻿using BlazorHosted.Client.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace BlazorHosted.Client
 {
@@ -23,6 +27,7 @@ namespace BlazorHosted.Client
             {
                 client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             });
 
             builder.Services.AddHttpClient("authorizedClient", client =>
@@ -36,3 +41,4 @@ namespace BlazorHosted.Client
         }
     }
 }
+

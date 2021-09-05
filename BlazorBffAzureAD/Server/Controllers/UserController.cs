@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using BlazorHosted.Server.Services;
 using BlazorHosted.Shared.Authorization;
 using IdentityModel;
@@ -68,8 +69,8 @@ namespace BlazorHosted.Server.Controllers
 
                 userInfo.Claims = claims;
 
-               // var nameidentifier = claimsPrincipal.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
-               // var data = await _graphApiClientService.GetGraphApiUser(nameidentifier);
+               var nameidentifier = claimsPrincipal.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+               var data = await _graphApiClientService.GetGraphApiUser(nameidentifier);
             }
 
             return userInfo;
