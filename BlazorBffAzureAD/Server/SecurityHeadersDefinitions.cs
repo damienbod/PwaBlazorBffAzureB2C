@@ -24,21 +24,21 @@ namespace BlazorHosted.Server
                 {
                     builder.SameOrigin();
                 })
-                .AddContentSecurityPolicy(builder =>
-                {
-                    builder.AddObjectSrc().None();
-                    builder.AddBlockAllMixedContent();
-                    builder.AddImgSrc().Self().From("data:");
-                    builder.AddFormAction().Self().From(idpHost);
-                    builder.AddFontSrc().Self();
-                    builder.AddStyleSrc().Self().UnsafeInline();
-                    builder.AddBaseUri().Self();
-                    builder.AddFrameAncestors().None();
+                //.AddContentSecurityPolicy(builder =>
+                //{
+                //    builder.AddObjectSrc().None();
+                //    builder.AddBlockAllMixedContent();
+                //    builder.AddImgSrc().Self().From("data:");
+                //    builder.AddFormAction().Self().From(idpHost);
+                //    builder.AddFontSrc().Self();
+                //    builder.AddStyleSrc().Self().UnsafeInline();
+                //    builder.AddBaseUri().Self();
+                //    builder.AddFrameAncestors().None();
 
-                    // due to Blazor
-                    builder.AddScriptSrc().Self().UnsafeInline().UnsafeEval();
+                //    // due to Blazor
+                //    builder.AddScriptSrc().Self().UnsafeInline().UnsafeEval();
 
-                })
+                //})
                 .RemoveServerHeader()
                 .AddPermissionsPolicy(builder =>
                 {

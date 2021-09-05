@@ -18,7 +18,7 @@ namespace BlazorHosted.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<GraphApiClientService>();
+            services.AddScoped<GraphApiClientService>();
 
             services.AddAntiforgery(options =>
             {

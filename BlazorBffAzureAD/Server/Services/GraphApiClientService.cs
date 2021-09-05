@@ -1,8 +1,5 @@
-﻿using Microsoft.Graph;
-using Microsoft.Identity.Web;
-using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using Azure.Identity;
+using Microsoft.Graph;
 
 namespace BlazorHosted.Server.Services
 {
@@ -10,9 +7,25 @@ namespace BlazorHosted.Server.Services
     {
         private readonly GraphServiceClient _graphServiceClient;
 
-        public GraphApiClientService(GraphServiceClient graphServiceClient)
+        public GraphApiClientService(IConfiguration configuration)
         {
-            _graphServiceClient = graphServiceClient;
+            string[] scopes = configuration.GetValue<string>("GraphApi:Scopes")?.Split(' ');
+            var tenantId = configuration.GetValue<string>("GraphApi:TenantId");
+
+            // Values from app registration
+            var clientId = configuration.GetValue<string>("GraphApi:ClientId");
+            var clientSecret = configuration.GetValue<string>("GraphApi:ClientSecret");
+
+            var options = new TokenCredentialOptions
+            {
+                AuthorityHost = AzureAuthorityHosts.AzurePublicCloud
+            };
+
+            // https://docs.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
+            var clientSecretCredential = new ClientSecretCredential(
+                tenantId, clientId, clientSecret, options);
+
+            _graphServiceClient = new GraphServiceClient(clientSecretCredential, scopes);
         }
 
         public async Task<User> GetGraphApiUser()
@@ -20,36 +33,8 @@ namespace BlazorHosted.Server.Services
             return await _graphServiceClient
                 .Me
                 .Request()
-                .WithScopes("User.ReadBasic.All", "user.read")
                 .GetAsync()
                 .ConfigureAwait(false);
-        }
-
-        public async Task<string> GetGraphApiProfilePhoto()
-        {
-            try
-            {
-                var photo = string.Empty;
-                // Get user photo
-                using (var photoStream = await _graphServiceClient
-                    .Me
-                    .Photo
-                    .Content
-                    .Request()
-                    .WithScopes("User.ReadBasic.All", "user.read")
-                    .GetAsync()
-                    .ConfigureAwait(false))
-                {
-                    byte[] photoByte = ((MemoryStream)photoStream).ToArray();
-                    photo = Convert.ToBase64String(photoByte);
-                }
-
-                return photo;
-            }
-            catch
-            {
-                return string.Empty;
-            }
         }
     }
 }

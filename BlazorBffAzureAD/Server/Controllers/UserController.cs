@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using BlazorHosted.Server.Services;
 using BlazorHosted.Shared.Authorization;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
@@ -13,14 +14,21 @@ namespace BlazorHosted.Server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private GraphApiClientService _graphApiClientService;
+
+        public UserController(GraphApiClientService graphApiClientService)
+        {
+            _graphApiClientService = graphApiClientService;
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult GetCurrentUser()
         {
-            return Ok(User.Identity.IsAuthenticated ? CreateUserInfo(User) : UserInfo.Anonymous);
+            return Ok(User.Identity.IsAuthenticated ? CreateUserInfoAsync(User) : UserInfo.Anonymous);
         }
 
-        private UserInfo CreateUserInfo(ClaimsPrincipal claimsPrincipal)
+        private async Task<UserInfo> CreateUserInfoAsync(ClaimsPrincipal claimsPrincipal)
         {
             if (!claimsPrincipal.Identity.IsAuthenticated)
             {
@@ -59,6 +67,8 @@ namespace BlazorHosted.Server.Controllers
                 //}
 
                 userInfo.Claims = claims;
+
+                var data = await _graphApiClientService.GetGraphApiUser();
             }
 
             return userInfo;
