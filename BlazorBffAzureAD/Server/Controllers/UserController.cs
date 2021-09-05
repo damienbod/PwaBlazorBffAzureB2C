@@ -68,7 +68,8 @@ namespace BlazorHosted.Server.Controllers
 
                 userInfo.Claims = claims;
 
-                var data = await _graphApiClientService.GetGraphApiUser();
+               // var nameidentifier = claimsPrincipal.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+               // var data = await _graphApiClientService.GetGraphApiUser(nameidentifier);
             }
 
             return userInfo;

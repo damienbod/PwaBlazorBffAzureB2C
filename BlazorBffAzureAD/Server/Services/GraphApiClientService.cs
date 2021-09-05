@@ -28,13 +28,24 @@ namespace BlazorHosted.Server.Services
             _graphServiceClient = new GraphServiceClient(clientSecretCredential, scopes);
         }
 
-        public async Task<User> GetGraphApiUser()
+        public async Task<User> GetGraphApiUser(string userId)
         {
-            return await _graphServiceClient
-                .Me
-                .Request()
-                .GetAsync()
-                .ConfigureAwait(false);
+            try
+            {
+                var d2 = await _graphServiceClient.Users[userId]
+                    .Request()
+                    .GetAsync()
+                    .ConfigureAwait(false);
+
+                return d2;
+
+            }
+            catch (Exception ex)
+            {
+                var da =  ex.Message;
+                return null;
+            }
+            
         }
     }
 }
