@@ -1,5 +1,9 @@
 # BlazorAzureB2CRoles
 
+# History 
+
+2021-11-02 Updated nuget packages, .NET 6
+
 # Links
 
 https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/graph-api
