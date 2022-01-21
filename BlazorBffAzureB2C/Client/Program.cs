@@ -27,7 +27,6 @@ namespace BlazorHosted.Client
             {
                 client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             });
 
             builder.Services.AddHttpClient("authorizedClient", client =>
@@ -37,8 +36,7 @@ namespace BlazorHosted.Client
 
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("default"));
 
-            await builder.Build().RunAsync().ConfigureAwait(false);
+            await builder.Build().RunAsync();
         }
     }
 }
-
