@@ -1,9 +1,9 @@
 using BlazorHosted.Server.Services;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,19 +24,21 @@ namespace BlazorHosted.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<GraphApiClientService>();
+            services.AddTransient<IClaimsTransformation, GraphApiClaimsTransformation>();
 
             services.AddAntiforgery(options =>
             {
                 options.HeaderName = "X-XSRF-TOKEN";
                 options.Cookie.Name = "__Host-X-XSRF-TOKEN";
-                options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
-                options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
 
             services.AddHttpClient();
             services.AddOptions();
 
-            string[] initialScopes = Configuration.GetValue<string>("DirectApi:ScopeForAccessToken")?.Split(' ');
+            var scopes = string.Empty; // Configuration.GetValue<string>("DownstreamApi:Scopes");
+            string[] initialScopes = scopes?.Split(' ');
 
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureB2C")
                 .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -47,10 +49,10 @@ namespace BlazorHosted.Server
 
             services.AddRazorPages().AddMvcOptions(options =>
             {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
+                //var policy = new AuthorizationPolicyBuilder()
+                //    .RequireAuthenticatedUser()
+                //    .Build();
+                //options.Filters.Add(new AuthorizeFilter(policy));
             }).AddMicrosoftIdentityUI();
         }
 

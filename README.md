@@ -2,6 +2,8 @@
 
 # History 
 
+2022-01-21 Updated nuget packages, code clean up
+
 2021-11-02 Updated nuget packages, .NET 6
 
 # Links
