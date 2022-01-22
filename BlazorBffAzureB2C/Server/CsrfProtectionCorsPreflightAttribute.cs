@@ -11,7 +11,8 @@ namespace BlazorHosted.Server
             var header = context.HttpContext.Request.Headers.Any(p => p.Key.ToLower() == "x-force-cors-preflight");
             if (!header)
             {
-                context.Result = new BadRequestObjectResult("X-FORCE-CORS-PREFLIGHT header is missing");
+                // "X-FORCE-CORS-PREFLIGHT header is missing"
+                context.Result = new UnauthorizedObjectResult("X-FORCE-CORS-PREFLIGHT header is missing");
                 return;
             }
         }
