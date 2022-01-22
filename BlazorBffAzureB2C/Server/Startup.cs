@@ -36,8 +36,7 @@ namespace BlazorHosted.Server
                 .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
                 .AddInMemoryTokenCaches();
 
-            services.AddControllersWithViews(options =>
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+            services.AddControllersWithViews();
 
             services.AddRazorPages().AddMvcOptions(options =>
             {
