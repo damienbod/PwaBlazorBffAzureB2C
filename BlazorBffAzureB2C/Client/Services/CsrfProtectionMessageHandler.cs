@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorHosted.Client
 {
-    public class CrsfProtectionMessageHandler : DelegatingHandler
+    public class CsrfProtectionMessageHandler : DelegatingHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)

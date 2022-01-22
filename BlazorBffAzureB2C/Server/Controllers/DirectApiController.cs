@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorHosted.Server.Controllers
 {
+    [CsrfProtectionCorsPreflight]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
