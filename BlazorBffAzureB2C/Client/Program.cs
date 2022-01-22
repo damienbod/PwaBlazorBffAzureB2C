@@ -29,12 +29,13 @@ namespace BlazorHosted.Client
             {
                 client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            }).AddHttpMessageHandler<CrsfProtectionMessageHandler>(); // add CRSF protection using CORS prelflight header
+            }).AddHttpMessageHandler<CrsfProtectionMessageHandler>(); // add CRSF protection using CORS preflight header
 
             builder.Services.AddHttpClient("authorizedClient", client =>
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            }).AddHttpMessageHandler<AuthorizedHandler>();
+            }).AddHttpMessageHandler<AuthorizedHandler>()
+            .AddHttpMessageHandler<CrsfProtectionMessageHandler>();
 
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("default"));
 
