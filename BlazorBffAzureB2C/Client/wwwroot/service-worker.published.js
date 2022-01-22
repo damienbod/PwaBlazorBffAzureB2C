@@ -41,6 +41,7 @@ async function onFetch(event) {
         const shouldServeIndexHtml = event.request.mode === 'navigate'
 			&& !event.request.url.includes('/signin-oidc')
             && !event.request.url.includes('/signout-callback-oidc')
+            && !event.request.url.includes('/api/Account/Login')
             && !event.request.url.includes('/HostAuthentication/');
 
         const request = shouldServeIndexHtml ? 'index.html' : event.request;

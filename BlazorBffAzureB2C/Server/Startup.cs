@@ -26,14 +26,6 @@ namespace BlazorHosted.Server
             services.AddScoped<GraphApiClientService>();
             services.AddTransient<IClaimsTransformation, GraphApiClaimsTransformation>();
 
-            services.AddAntiforgery(options =>
-            {
-                options.HeaderName = "X-XSRF-TOKEN";
-                options.Cookie.Name = "__Host-X-XSRF-TOKEN";
-                options.Cookie.SameSite = SameSiteMode.Strict;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            });
-
             services.AddHttpClient();
             services.AddOptions();
 

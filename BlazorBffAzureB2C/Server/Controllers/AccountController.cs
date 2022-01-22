@@ -19,7 +19,6 @@ namespace BlazorHosted.Server.Controllers
             });
         }
 
-        // [ValidateAntiForgeryToken] // not needed explicitly due the the Auto global definition.
         [Authorize]
         [HttpPost("Logout")]
         public IActionResult Logout()

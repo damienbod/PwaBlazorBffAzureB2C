@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorHosted.Server.Controllers
 {
-    [ValidateAntiForgeryToken]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
