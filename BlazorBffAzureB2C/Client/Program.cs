@@ -21,18 +21,22 @@ namespace BlazorHosted.Client
             builder.Services.TryAddSingleton(sp => (HostAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
             builder.Services.AddTransient<AuthorizedHandler>();
 
+            builder.Services.AddTransient<CsrfProtectionMessageHandler>();
+
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddHttpClient("default", client =>
             {
                 client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            });
+            }).AddHttpMessageHandler<CsrfProtectionMessageHandler>(); // add CRSF protection using CORS preflight header
 
             builder.Services.AddHttpClient("authorizedClient", client =>
             {
+                client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            }).AddHttpMessageHandler<AuthorizedHandler>();
+            }).AddHttpMessageHandler<AuthorizedHandler>()
+            .AddHttpMessageHandler<CsrfProtectionMessageHandler>();
 
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("default"));
 

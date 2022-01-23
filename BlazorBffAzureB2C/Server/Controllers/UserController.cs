@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlazorHosted.Server.Controllers
 {
     // orig src https://github.com/berhir/BlazorWebAssemblyCookieAuth
+    [CsrfProtectionCorsPreflight]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

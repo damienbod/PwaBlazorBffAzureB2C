@@ -8,7 +8,7 @@ using Microsoft.Identity.Web;
 
 namespace BlazorHosted.Server.Controllers
 {
-    [ValidateAntiForgeryToken]
+    [CsrfProtectionCorsPreflight]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [AuthorizeForScopes(Scopes = new string[] { "User.ReadBasic.All user.read" })]
     [ApiController]
