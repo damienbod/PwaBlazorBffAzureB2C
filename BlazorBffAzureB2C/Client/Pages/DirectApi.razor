@@ -1,6 +1,6 @@
 ﻿@page "/directapi"
-@inject HttpClient Http
 @inject IJSRuntime JSRuntime
+@inject IHttpClientFactory httpClientFactory 
 
 <h1>Data from Direct API</h1>
 
@@ -30,9 +30,11 @@ else
 @code {
     private string[] apiData;
 
+    
     protected override async Task OnInitializedAsync()
     {
-        apiData = await Http.GetFromJsonAsync<string[]>("api/DirectApi");
+        var client = httpClientFactory.CreateClient("authorizedClient");
+        apiData = await client.GetFromJsonAsync<string[]>("api/DirectApi");
     }
 
 }
