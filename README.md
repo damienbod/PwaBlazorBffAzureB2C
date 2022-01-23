@@ -2,6 +2,8 @@
 
 # History 
 
+2022-01-23 Added support for PWA, switched to CORS preflight due to the PWA
+
 2022-01-21 Updated nuget packages, code clean up
 
 2021-11-02 Updated nuget packages, .NET 6
