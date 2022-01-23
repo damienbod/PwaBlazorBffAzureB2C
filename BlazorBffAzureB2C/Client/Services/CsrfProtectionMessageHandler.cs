@@ -11,7 +11,7 @@ namespace BlazorHosted.Client
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            request.Headers.Add("X-FORCE-CORS-PREFLIGHT", "1");
+            request.Headers.Add("X-FORCE-CORS-PREFLIGHT", "true");
 
             return await base.SendAsync(request, cancellationToken);
         }
