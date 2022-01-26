@@ -20,6 +20,7 @@ namespace BlazorHosted.Server.Controllers
         }
 
         [Authorize]
+        [CsrfProtectionCorsPreflight]
         [HttpPost("Logout")]
         public IActionResult Logout()
         {

@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject IHttpClientFactory httpClientFactory 
+@inject NavigationManager navigation
 
 <div class="page">
     <div class="sidebar">
@@ -10,9 +12,7 @@
             <AuthorizeView>
                 <Authorized>
                     <strong>Hello, @context.User.Identity.Name!</strong>
-                    <form method="post" action="api/Account/Logout">
-                        <button class="btn btn-link" type="submit">Sign out</button>
-                    </form>
+                    <button class="btn btn-link" @onclick="Signout">Sign - out</button>
                 </Authorized>
                 <NotAuthorized>
                     <a href="api/Account/Login">Log in</a>
@@ -26,3 +26,13 @@
         </div>
     </div>
 </div>
+
+@code {
+    private async Task Signout()
+    {
+        var client = httpClientFactory.CreateClient("authorizedClient");
+        await client.PostAsync("api/Account/Logout", null);
+
+        navigation.NavigateTo("/", true);
+    }
+}

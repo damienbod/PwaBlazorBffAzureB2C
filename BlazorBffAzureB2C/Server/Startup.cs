@@ -29,6 +29,15 @@ namespace BlazorHosted.Server
             services.AddHttpClient();
             services.AddOptions();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("idpAllowed",
+                    builder =>
+                    {
+                        builder.WithOrigins(Configuration["AzureB2C:Instance"]);
+                    });
+            });
+
             var scopes = string.Empty; // Configuration.GetValue<string>("DownstreamApi:Scopes");
             string[] initialScopes = scopes?.Split(' ');
 
@@ -58,6 +67,8 @@ namespace BlazorHosted.Server
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            app.UseCors("idpAllowed");
 
             app.UseSecurityHeaders(
                 SecurityHeadersDefinitions.GetHeaderPolicyCollection(env.IsDevelopment(),
