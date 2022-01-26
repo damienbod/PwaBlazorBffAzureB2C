@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BlazorHosted.Server.Controllers
 {
@@ -22,12 +23,11 @@ namespace BlazorHosted.Server.Controllers
         [Authorize]
         [CsrfProtectionCorsPreflight]
         [HttpPost("Logout")]
-        public IActionResult Logout()
+        public async Task<IActionResult> LogoutAsync()
         {
-            return SignOut(
-                new AuthenticationProperties { RedirectUri = "/" },
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                OpenIdConnectDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            return Redirect("/");
         }
     }
 }
