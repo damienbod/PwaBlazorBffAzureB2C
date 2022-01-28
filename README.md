@@ -1,5 +1,7 @@
 # PWA with Blazor BFF and Azure B2C 
 
+[Implement a PWA using Blazor with BFF security and Azure B2C](https://damienbod.com)
+
 # History 
 
 2022-01-28 Updated repo
