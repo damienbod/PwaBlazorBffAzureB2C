@@ -1,6 +1,8 @@
-# BlazorAzureB2CRoles
+# PWA with Blazor BFF and Azure B2C 
 
 # History 
+
+2022-01-28 Updated repo
 
 2022-01-23 Added support for PWA, switched to CORS preflight due to the PWA
 
