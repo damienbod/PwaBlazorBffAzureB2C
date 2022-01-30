@@ -23,3 +23,5 @@ https://techieshour.wordpress.com/2020/05/11/managing-azure-b2c-users-with-micro
 https://docs.microsoft.com/en-us/graph/sdks/choose-authentication-providers?tabs=CS#client-credentials-provider
 
 https://github.com/search?q=Microsoft.Identity.Web
+
+https://damienbod.com/2022/01/10/comparing-the-backend-for-frontend-bff-security-architecture-with-an-spa-ui-using-a-public-api/
