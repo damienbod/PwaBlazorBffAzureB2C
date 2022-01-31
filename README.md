@@ -4,6 +4,8 @@
 
 # History 
 
+2022-01-31 updated readme
+
 2022-01-28 Updated repo
 
 2022-01-23 Added support for PWA, switched to CORS preflight due to the PWA
