@@ -1,6 +1,6 @@
 # PWA with Blazor BFF and Azure B2C 
 
-[Implement a PWA using Blazor with BFF security and Azure B2C](https://damienbod.com)
+[Implement a PWA using Blazor with BFF security and Azure B2C](https://damienbod.com/2022/01/31/implement-a-pwa-using-blazor-with-bff-security-and-azure-b2c/)
 
 # History 
 
