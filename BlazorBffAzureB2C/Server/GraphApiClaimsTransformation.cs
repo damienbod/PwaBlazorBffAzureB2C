@@ -12,13 +12,12 @@ namespace BlazorHosted.Server
 
         public GraphApiClaimsTransformation(GraphApiClientService graphApiClientService)
         {
-
             _graphApiClientService = graphApiClientService;
         }
 
         public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity();
+            ClaimsIdentity claimsIdentity = new();
             var groupClaimType = "group";
             if (!principal.HasClaim(claim => claim.Type == groupClaimType))
             {
