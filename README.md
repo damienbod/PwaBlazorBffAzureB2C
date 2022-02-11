@@ -4,6 +4,8 @@
 
 # History 
 
+2022-02-11 updated packages
+
 2022-01-31 updated readme
 
 2022-01-28 Updated repo
