@@ -19,7 +19,7 @@ public class Startup
     }
 
     public IConfiguration Configuration { get; }
-    protected IServiceProvider ApplicationServices { get; set; } = null;
+    protected IServiceProvider? ApplicationServices { get; set; } = null;
 
     public void ConfigureServices(IServiceCollection services)
     {
@@ -29,8 +29,9 @@ public class Startup
         services.AddHttpClient();
         services.AddOptions();
 
-        var scopes = string.Empty; // Configuration.GetValue<string>("DownstreamApi:Scopes");
-        string[] initialScopes = scopes?.Split(' ');
+        // Configuration.GetValue<string>("DownstreamApi:Scopes");
+        // string[] initialScopes = scopes?.Split(' ');
+        string[] initialScopes = Array.Empty<string>(); 
 
         services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureB2C")
             .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
