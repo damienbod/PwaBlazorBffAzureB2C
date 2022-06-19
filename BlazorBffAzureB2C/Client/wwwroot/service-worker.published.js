@@ -43,6 +43,8 @@ async function onFetch(event) {
             && !event.request.url.includes('/signout-callback-oidc')
             && !event.request.url.includes('/api/Account/Login')
             && !event.request.url.includes('/api/Account/Logout')
+            && !event.request.url.includes('/api/User')
+            && !event.request.url.includes('/authorize')
             && !event.request.url.includes('/HostAuthentication/');
 
         const request = shouldServeIndexHtml ? 'index.html' : event.request;
