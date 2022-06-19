@@ -1,8 +1,6 @@
 ﻿using BlazorHosted.Server.Services;
 using Microsoft.AspNetCore.Authentication;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace BlazorHosted.Server;
 
