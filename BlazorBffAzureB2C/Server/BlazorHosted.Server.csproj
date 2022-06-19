@@ -19,8 +19,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.6" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.Graph" Version="4.21.0" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="1.23.1" />
-    <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.23.1" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.25.0" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.25.0" />
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.16.1" />
   </ItemGroup>
 
