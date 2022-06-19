@@ -4,6 +4,8 @@
 
 # History 
 
+2022-06-19 updated packages, .NET 6 code styles
+
 2022-02-11 updated packages
 
 2022-01-31 updated readme
