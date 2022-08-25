@@ -45,7 +45,7 @@ async function onFetch(event) {
             && !event.request.url.includes('/api/Account/Logout')
             && !event.request.url.includes('/api/User')
             && !event.request.url.includes('/authorize')
-            && !event.request.url.includes('/HostAuthentication/');
+            && !event.request.url.includes('/security.txt');
 
         const request = shouldServeIndexHtml ? 'index.html' : event.request;
         const cache = await caches.open(cacheName);
